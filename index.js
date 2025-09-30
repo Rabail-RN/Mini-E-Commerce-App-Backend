@@ -7,7 +7,7 @@ import connectDB from './config/connectDB.js';
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: "https://mini-e-commerce-app-frontend-24vu7z0ss-rabail-nasirs-projects.vercel.app/",
+  origin: "https://mini-e-commerce-app-frontend-pe5eqb09k-rabail-nasirs-projects.vercel.app/",
   credentials: true
 }));
 
