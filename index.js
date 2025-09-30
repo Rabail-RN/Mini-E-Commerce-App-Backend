@@ -1,0 +1,38 @@
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import quickcartRouter from './routes/quickcartRouter.js';
+import connectDB from './config/connectDB.js';
+
+const app = express();
+app.use(express.json());
+app.use(cors("https://mini-e-commerce-app-frontend.vercel.app/"));
+
+const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI;
+
+app.get("/", (req, res) => {
+  res.send("Backend is running with MongoDB!");
+});
+
+// Add router here by importing it first
+app.use("/quickcart", quickcartRouter);
+
+if (!MONGO_URI) {
+  console.error("MONGO_URI not found");
+}
+
+const startServer = async() => {
+  const connection = await connectDB();
+
+  if (connection) {
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
+  }
+  else {
+    console.error("Database connection failed. Sever cannot be started.");
+  }
+};
+
+startServer();
