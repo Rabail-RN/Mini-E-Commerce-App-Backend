@@ -8,10 +8,8 @@ const connectDB = async () => {
       throw new Error('MONGO_URI is not defined in environment variables');
     }
 
-    await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    await mongoose.connect(mongoURI);
+    console.log("Database connected successfully");
         
     console.log('Database connected successfully');
 
@@ -19,7 +17,6 @@ const connectDB = async () => {
 
   } catch (err) {
     console.error('Error connecting to database:', err.message);
-    process.exit(1);
     return false;
   }
 };

@@ -6,7 +6,10 @@ import connectDB from './config/connectDB.js';
 
 const app = express();
 app.use(express.json());
-app.use(cors("https://mini-e-commerce-app-frontend.vercel.app/"));
+app.use(cors({
+  origin: "https://mini-e-commerce-app-frontend.vercel.app/",
+  credentials: true
+}));
 
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
@@ -23,9 +26,9 @@ if (!MONGO_URI) {
 }
 
 const startServer = async() => {
-  const connection = await connectDB();
+  const connected = await connectDB();
 
-  if (connection) {
+  if (connected) {
     app.listen(PORT, () => {
       console.log(`Server is running on http://localhost:${PORT}`);
     });
